@@ -1,8 +1,5 @@
 import joi from "joi";
-import {
-  CreateBillData,
-  UpdateBillData,
-} from "../repositories/billRepository.js";
+import { CreateBillData } from "../repositories/billRepository.js";
 
 export const createBillSchema = joi.object({
   title: joi.string().required(),
@@ -68,7 +65,6 @@ export const createBillSchema = joi.object({
 });
 
 export const updateBillSchema = joi.object({
-  billId: joi.number().integer().required(),
   dueDay: joi
     .string()
     .valid(

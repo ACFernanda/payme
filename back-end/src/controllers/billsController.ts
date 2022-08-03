@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
-import { CreateBillData } from "../repositories/billRepository";
+
+import { CreateBillData } from "../repositories/billRepository.js";
+import { UpdateBillData } from "../repositories/transactionRepository.js";
 import { UserTokenInfo } from "../repositories/authRepository.js";
 
 import * as billService from "./../services/billService.js";
@@ -19,6 +21,14 @@ export async function createBill(req: Request, res: Response) {
   res.sendStatus(201);
 }
 
-export async function updateBill(req: Request, res: Response) {}
+export async function updateBill(req: Request, res: Response) {
+  const bill = req.body;
+  const billId = parseInt(req.params.id);
+  const user: UserTokenInfo = res.locals.user;
+  const billData: UpdateBillData = { ...bill, userId: user.id, billId };
+
+  await billService.updateBill(billData);
+  res.sendStatus(201);
+}
 
 export async function deleteBill(req: Request, res: Response) {}
