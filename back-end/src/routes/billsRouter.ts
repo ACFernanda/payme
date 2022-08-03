@@ -17,6 +17,6 @@ billsRouter.use(tokenValidator);
 billsRouter.get("/bills", getBills);
 billsRouter.post("/bills", schemaValidator(createBillSchema), createBill);
 billsRouter.put("/bills/:id", schemaValidator(updateBillSchema), updateBill);
-billsRouter.delete("/bills/:id", deleteBill);
+billsRouter.delete("/transactions/:id", deleteBill);
 
 export default billsRouter;

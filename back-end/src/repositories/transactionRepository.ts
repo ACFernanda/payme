@@ -8,3 +8,16 @@ export async function insert(billData: UpdateBillData) {
     data: billData,
   });
 }
+
+export async function deleteBill(transactionId: number) {
+  await prisma.transactions.delete({
+    where: { id: transactionId },
+  });
+}
+
+export async function findById(transactionId: number) {
+  const transaction = await prisma.transactions.findUnique({
+    where: { id: transactionId },
+  });
+  return transaction;
+}

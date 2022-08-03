@@ -31,4 +31,10 @@ export async function updateBill(req: Request, res: Response) {
   res.sendStatus(201);
 }
 
-export async function deleteBill(req: Request, res: Response) {}
+export async function deleteBill(req: Request, res: Response) {
+  const transactionId = parseInt(req.params.id);
+  const user: UserTokenInfo = res.locals.user;
+
+  await billService.deleteBill(transactionId, user.id);
+  res.sendStatus(201);
+}
