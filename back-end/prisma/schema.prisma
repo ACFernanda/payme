@@ -46,4 +46,6 @@ model transactions {
 
   bill            bills @relation(fields: [billId], references: [id])
   user            users @relation(fields: [userId], references: [id])
+
+  @@unique([billId, userId, value, dueDay, dueMonth, dueYear, paid])
 }
