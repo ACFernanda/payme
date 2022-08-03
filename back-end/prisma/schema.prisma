@@ -9,3 +9,41 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model users {
+  id                  Int           @id @default(autoincrement())
+  name                String
+  email               String        @unique
+  password            String
+
+  bills bills[]
+  transactions transactions[]
+}
+
+model bills {
+  id                  Int           @id @default(autoincrement())
+  userId              Int
+  title               String
+  dueDay              String
+  dueMonth            String
+  dueYear             String
+  value               String
+  recurrence          Boolean       @default(false)
+
+  user            users @relation(fields: [userId], references: [id])
+  transactions transactions[]
+}
+
+model transactions {
+  id                  Int           @id @default(autoincrement())
+  billId              Int
+  userId              Int
+  value               String
+  dueDay              String
+  dueMonth            String
+  dueYear             String
+  paid                Boolean       @default(false)
+
+  bill            bills @relation(fields: [billId], references: [id])
+  user            users @relation(fields: [userId], references: [id])
+}
