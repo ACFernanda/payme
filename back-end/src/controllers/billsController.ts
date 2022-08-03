@@ -4,7 +4,11 @@ import { UserTokenInfo } from "../repositories/authRepository.js";
 
 import * as billService from "./../services/billService.js";
 
-export async function getBills(req: Request, res: Response) {}
+export async function getBills(req: Request, res: Response) {
+  const user: UserTokenInfo = res.locals.user;
+  const bills = await billService.getBills(user.id);
+  res.status(200).send(bills);
+}
 
 export async function createBill(req: Request, res: Response) {
   const bill = req.body;

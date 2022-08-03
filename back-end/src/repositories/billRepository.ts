@@ -4,10 +4,10 @@ import { bills, transactions } from "@prisma/client";
 export type CreateBillData = Omit<bills, "id">;
 export type UpdateBillData = Omit<transactions, "id">;
 
-export async function findById(id: number) {
+export async function findByUserId(userId: number) {
   const bills = await prisma.bills.findMany({
-    where: { userId: id },
-    select: { transactions: { where: { userId: id } } },
+    where: { userId },
+    include: { transactions: { where: { userId } } },
   });
   return bills;
 }
