@@ -4,6 +4,7 @@ import { users } from "@prisma/client";
 export type CreateUserData = Omit<users, "id">;
 
 export interface UserTokenInfo {
+  name: string;
   email: string;
   id: number;
 }

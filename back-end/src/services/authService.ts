@@ -23,8 +23,8 @@ export async function signUp(userData: CreateUserData) {
   await insert(userData);
 }
 
-export async function signIn(userData: CreateUserData) {
-  const { name, email, password } = userData;
+export async function signIn(userData: { email: string; password: string }) {
+  const { email, password } = userData;
 
   const user = await findByEmail(email);
 
@@ -34,9 +34,13 @@ export async function signIn(userData: CreateUserData) {
       message: "Wrong email or password",
     };
 
-  const token = jwt.sign({ id: user.id, name, email }, process.env.SECRET_KEY, {
-    expiresIn: 60 * 60 * 24 * 30,
-  });
+  const token = jwt.sign(
+    { id: user.id, email, name: user.name },
+    process.env.SECRET_KEY,
+    {
+      expiresIn: 60 * 60 * 24 * 30,
+    }
+  );
 
   return token;
 }
