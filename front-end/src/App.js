@@ -3,9 +3,9 @@ import { useState } from "react";
 import GlobalStyle from "./styles/GlobalStyle";
 import LoginPage from "./pages/Login";
 import RegisterPage from "./pages/SignUp";
-import HomePage from "./pages/HomePage";
-import CreateBill from "./pages/CreateBill";
-import UpdateBill from "./pages/UpdateBill";
+// import HomePage from "./pages/HomePage";
+// import CreateBill from "./pages/CreateBill";
+// import UpdateBill from "./pages/UpdateBill";
 
 import UserContext from "./contexts/UserContext.js";
 import TokenContext from "./contexts/TokenContext.js";
@@ -21,9 +21,9 @@ const App = () => {
           <Routes>
             <Route path="/" element={<LoginPage />} />
             <Route path="/sign-up" element={<RegisterPage />} />
-            <Route path="/main" element={<HomePage />} />
-            <Route path="/bills/new" element={<CreateBill />} />
-            <Route path="/bills/:id" element={<UpdateBill />} />
+            {/* <Route path="/main" element={<HomePage />} /> */}
+            {/* <Route path="/bills/new" element={<CreateBill />} />
+            <Route path="/bills/:id" element={<UpdateBill />} /> */}
           </Routes>
           <GlobalStyle />
         </Router>
