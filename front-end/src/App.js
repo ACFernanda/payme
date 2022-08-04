@@ -3,7 +3,7 @@ import { useState } from "react";
 import GlobalStyle from "./styles/GlobalStyle";
 import LoginPage from "./pages/Login";
 import RegisterPage from "./pages/SignUp";
-// import Homepage from "./pages/Homepage";
+import Homepage from "./pages/Homepage";
 // import CreateBill from "./pages/CreateBill";
 // import UpdateBill from "./pages/UpdateBill";
 
@@ -21,7 +21,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<LoginPage />} />
             <Route path="/sign-up" element={<RegisterPage />} />
-            {/* <Route path="/main" element={<Homepage />} /> */}
+            <Route path="/main" element={<Homepage />} />
             {/* <Route path="/bills/new" element={<CreateBill />} />
             <Route path="/bills/:id" element={<UpdateBill />} /> */}
           </Routes>
