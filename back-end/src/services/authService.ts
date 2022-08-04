@@ -42,5 +42,6 @@ export async function signIn(userData: { email: string; password: string }) {
     }
   );
 
-  return token;
+  delete user.password;
+  return { token, user };
 }

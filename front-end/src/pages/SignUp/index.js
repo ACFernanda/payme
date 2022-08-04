@@ -26,8 +26,8 @@ export default function SignUpPage() {
     try {
       await signUp(formData);
       navigate("/");
-    } catch {
-      alert("Erro! :( Tente novamente.");
+    } catch (error) {
+      alert(`Something went wrong. ${error.message}`);
     }
   }
 
