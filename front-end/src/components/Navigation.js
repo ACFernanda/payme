@@ -3,7 +3,17 @@ import styled from "styled-components";
 import { IconContext } from "react-icons";
 import { IoMdArrowDropright, IoMdArrowDropleft } from "react-icons/io";
 
-export default function Navigation() {
+import TokenContext from "../contexts/TokenContext";
+
+export default function Navigation({
+  month,
+  year,
+  setMonth,
+  setYear,
+  setBills,
+  getAllBills,
+}) {
+  const { token } = useContext(TokenContext);
   const months = {
     0: "JANEIRO",
     1: "FEVEREIRO",
@@ -18,10 +28,6 @@ export default function Navigation() {
     10: "NOVEMBRO",
     11: "DEZEMBRO",
   };
-  const today = new Date();
-
-  const [month, setMonth] = useState(today.getMonth());
-  const [year, setYear] = useState(today.getFullYear());
 
   return (
     <Container>

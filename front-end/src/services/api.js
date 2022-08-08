@@ -12,10 +12,18 @@ export const signIn = async (formData) => {
   return api.post("/sign-in", formData);
 };
 
-// export const getBills = async (token) => {
-//   return api.get("/bills", {
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//   });
-// };
+export const getBills = async (token, month, year) => {
+  let formattedMonth = "";
+
+  if (month < 10) {
+    formattedMonth = `0${month}`;
+  } else {
+    formattedMonth = month;
+  }
+
+  return api.get(`/bills/${formattedMonth}/${year}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

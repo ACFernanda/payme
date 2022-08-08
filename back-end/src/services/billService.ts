@@ -8,8 +8,12 @@ export async function create(billData: CreateBillData) {
   return;
 }
 
-export async function getBills(userId: number) {
-  const bills = await billRepository.findByUserId(userId);
+export async function getBills(userId: number, month: string, year: string) {
+  const bills = await billRepository.findByUserIdMonthAndYear(
+    userId,
+    month,
+    year
+  );
   return bills;
 }
 

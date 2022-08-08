@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import BillInfo from "./BillInfo";
 
-export default function Table() {
+export default function Table({ bills }) {
   const navigate = useNavigate();
 
   return (
@@ -13,7 +13,11 @@ export default function Table() {
         <span className="bill">Conta</span>
         <span className="value">Valor</span>
       </header>
-      <BillInfo />
+      {bills.length > 0 ? (
+        bills.map((bill) => <BillInfo bill={bill} key={bill.id} />)
+      ) : (
+        <></>
+      )}
       <div className="add-bill" onClick={() => navigate("/bills/new")}>
         <span className="add">Adicionar conta</span>
       </div>

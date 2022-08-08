@@ -1,14 +1,18 @@
 import styled from "styled-components";
 
-export default function BillInfo() {
+export default function BillInfo({ bill }) {
   return (
     <BillContainer>
-      <p className="due">27</p>
-      <span>
-        <img src={"assets/loop.png"} alt="loop" />
-      </span>
-      <p className="bill">Condomínio</p>
-      <p className="value">R$ 9.999,99</p>
+      <p className="due">{bill.dueDay}</p>
+      {bill.recurrence === true ? (
+        <span>
+          <img src={"assets/loop.png"} alt="loop" />
+        </span>
+      ) : (
+        <span></span>
+      )}
+      <p className="bill">{bill.title}</p>
+      <p className="value">R$ {bill.value}</p>
     </BillContainer>
   );
 }
@@ -27,6 +31,7 @@ const BillContainer = styled.div`
   color: #333333;
   margin: 2px 0 2px 0;
   cursor: pointer;
+  position: relative;
 
     .due {
       width: 92px;
@@ -34,7 +39,7 @@ const BillContainer = styled.div`
     }
 
     .bill {
-      padding-left: 22px;
+      padding-left: 45px;
       width: 250px;
     }
 
@@ -45,6 +50,8 @@ const BillContainer = styled.div`
     }
 
     span {
+      position: absolute;
+      left: 84px;
       margin-top: 5px;
       img {
         width: 28px;
