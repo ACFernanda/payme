@@ -3,7 +3,7 @@ import styled from "styled-components";
 export default function Header() {
   return (
     <Container>
-      <img src={"assets/bill.png"} alt="logo" />
+      <img src={"/assets/bill.png"} alt="logo" />
       <h1>PayMe</h1>
     </Container>
   );

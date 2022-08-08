@@ -1,9 +1,12 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 export default function LoggedHeader() {
+  const navigate = useNavigate();
+
   return (
-    <Container>
-      <img src={"assets/bill.png"} alt="logo" />
+    <Container onClick={() => navigate("/main")}>
+      <img src={"/assets/bill.png"} alt="logo" />
       <h1>PayMe</h1>
     </Container>
   );
@@ -14,6 +17,7 @@ const Container = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 
   img {
     width: 110px;

@@ -23,7 +23,7 @@ export default function NewBillContainer() {
     try {
       alert("Criei");
       console.log(formData);
-      // navigate("/");
+      navigate("/");
     } catch (error) {
       alert(`Something went wrong. ${error.message}`);
     }
@@ -91,7 +91,7 @@ export default function NewBillContainer() {
 }
 
 const Container = styled.div`
-  width: 400px;
+  width: 500px;
   height: 400px;
   background: #d9d9d9;
   border-radius: 10px 10px 0px 0px;
@@ -111,14 +111,17 @@ const Container = styled.div`
 
     input {
       width: 160px;
+      height: 25px;
+      font-size: 16px;
     }
 
     .checkbox {
-      width: 135px;
+      width: 100px;
+      height: 15px;
     }
 
     label {
-      font-size: 20px;
+      font-size: 22px;
     }
 
     .line {
@@ -128,16 +131,17 @@ const Container = styled.div`
     }
 
     button {
-      width: 400px;
-      height: 60px;
+      width: 500px;
+      height: 65px;
       background: #fd227c;
       border: none;
       border-radius: 0px 0px 10px 10px;
       font-family: "Recursive";
       font-style: normal;
       font-weight: 600;
-      font-size: 20px;
+      font-size: 24px;
       color: #ffffff;
+      cursor: pointer;
 
       position: absolute;
       top: 405px;
