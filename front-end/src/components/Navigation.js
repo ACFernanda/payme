@@ -35,6 +35,7 @@ export default function Navigation() {
               setMonth(month - 1);
             }
           }}
+          style={{ cursor: "pointer" }}
         />
         <div>
           <p>
@@ -50,6 +51,7 @@ export default function Navigation() {
               setMonth(month + 1);
             }
           }}
+          style={{ cursor: "pointer" }}
         />
       </IconContext.Provider>
     </Container>

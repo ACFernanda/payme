@@ -1,8 +1,11 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import BillInfo from "./BillInfo";
 
 export default function Table() {
+  const navigate = useNavigate();
+
   return (
     <Container>
       <header>
@@ -11,7 +14,7 @@ export default function Table() {
         <span className="value">Valor</span>
       </header>
       <BillInfo />
-      <div className="add-bill">
+      <div className="add-bill" onClick={() => navigate("/bills/new")}>
         <span className="add">Adicionar conta</span>
       </div>
     </Container>
@@ -62,4 +65,5 @@ const Container = styled.div`
     font-size: 25px;
     color: #333333;
     margin: 4px 0 30px 0;
+    cursor: pointer;
 `;

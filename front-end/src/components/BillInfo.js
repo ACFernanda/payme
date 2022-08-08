@@ -26,6 +26,7 @@ const BillContainer = styled.div`
   font-size: 24px;
   color: #333333;
   margin: 2px 0 2px 0;
+  cursor: pointer;
 
     .due {
       width: 92px;
