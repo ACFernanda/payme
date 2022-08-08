@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 
 import LoggedHeader from "../../components/LoggedHeader";
 import Navigation from "../../components/Navigation";
+import Table from "../../components/Table";
 import { Container } from "./style";
 import UserContext from "../../contexts/UserContext";
 
@@ -13,7 +14,7 @@ export default function Homepage() {
       <LoggedHeader />
       <h2>Olá, {user.name}!</h2>
 
-      {/* <Table /> */}
+      <Table />
       <Navigation />
     </Container>
   );
