@@ -8,8 +8,8 @@ import * as billService from "./../services/billService.js";
 
 export async function getBills(req: Request, res: Response) {
   const user: UserTokenInfo = res.locals.user;
-  const month = req.params.month;
-  const year = req.params.year;
+  const month = parseInt(req.params.month);
+  const year = parseInt(req.params.year);
   const bills = await billService.getBills(user.id, month, year);
   res.status(200).send(bills);
 }

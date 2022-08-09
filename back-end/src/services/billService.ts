@@ -8,7 +8,7 @@ export async function create(billData: CreateBillData) {
   return;
 }
 
-export async function getBills(userId: number, month: string, year: string) {
+export async function getBills(userId: number, month: number, year: number) {
   const bills = await billRepository.findByUserIdMonthAndYear(
     userId,
     month,

@@ -5,15 +5,15 @@ export type CreateBillData = Omit<bills, "id">;
 
 export async function findByUserIdMonthAndYear(
   userId: number,
-  month: string,
-  year: string
+  month: number,
+  year: number
 ) {
   const bills = await prisma.bills.findMany({
     where: {
       OR: [
         { userId, dueMonth: month, dueYear: year },
-        { userId, recurrence: true, dueYear: year, dueMonth: { gte: month } },
-        { userId, recurrence: true, dueYear: { gt: year } },
+        { userId, recurrence: true, dueYear: year, dueMonth: { lt: month } },
+        { userId, recurrence: true, dueYear: { lt: year } },
       ],
     },
     include: { transactions: { where: { userId } } },

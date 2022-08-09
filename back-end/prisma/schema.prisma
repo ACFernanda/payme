@@ -24,9 +24,9 @@ model bills {
   id                  Int           @id @default(autoincrement())
   userId              Int
   title               String
-  dueDay              String
-  dueMonth            String
-  dueYear             String
+  dueDay              Int
+  dueMonth            Int
+  dueYear             Int
   value               String
   recurrence          Boolean       @default(false)
 
@@ -39,9 +39,9 @@ model transactions {
   billId              Int
   userId              Int
   value               String
-  dueDay              String
-  dueMonth            String
-  dueYear             String
+  dueDay              Int
+  dueMonth            Int
+  dueYear             Int
   paid                Boolean       @default(false)
 
   bill            bills @relation(fields: [billId], references: [id])
