@@ -42,7 +42,7 @@ export default function NewBillContainer() {
     <Container>
       <form onSubmit={addNewBill}>
         <div className="line">
-          <label for="title">Conta</label>
+          <label forhtml="title">Conta</label>
           <input
             required
             name="title"
@@ -54,7 +54,7 @@ export default function NewBillContainer() {
         </div>
 
         <div className="line">
-          <label for="date">Vencimento</label>
+          <label forhtml="date">Vencimento</label>
           <input
             required
             name="date"
@@ -65,7 +65,7 @@ export default function NewBillContainer() {
         </div>
 
         <div className="line">
-          <label for="value">Valor</label>
+          <label forhtml="value">Valor</label>
           <input
             required
             name="value"
@@ -79,7 +79,7 @@ export default function NewBillContainer() {
           />
         </div>
         <div className="line">
-          <label for="recurrence">Recorrência mensal</label>
+          <label forhtml="recurrence">Recorrência mensal</label>
           <input
             className="checkbox"
             type="checkbox"

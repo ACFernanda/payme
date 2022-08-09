@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export default function BillInfo({ bill }) {
+export default function BillInfo({ bill, month }) {
   return (
-    <Link to={`/bills/${bill.id}`}>
+    <Link to={`/bills/${bill.id}/${month}`}>
       <BillContainer>
         <p className="due">{bill.dueDay}</p>
         {bill.recurrence === true ? (

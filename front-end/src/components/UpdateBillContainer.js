@@ -6,7 +6,7 @@ import TokenContext from "../contexts/TokenContext";
 import UserContext from "../contexts/UserContext";
 import { getBill, createTransaction } from "../services/api";
 
-export default function UpdateBillContainer({ billId }) {
+export default function UpdateBillContainer({ billId, month }) {
   const { token } = useContext(TokenContext);
   const { user } = useContext(UserContext);
   const [title, setTitle] = useState("");
@@ -23,13 +23,9 @@ export default function UpdateBillContainer({ billId }) {
       billResponse.then((res) => {
         setTitle(res.data.title);
         {
-          res.data.dueMonth < 10
-            ? setDate(
-                `${res.data.dueYear}-0${res.data.dueMonth}-${res.data.dueDay}`
-              )
-            : setDate(
-                `${res.data.dueYear}-${res.data.dueMonth}-${res.data.dueDay}`
-              );
+          month < 10
+            ? setDate(`${res.data.dueYear}-0${month}-${res.data.dueDay}`)
+            : setDate(`${res.data.dueYear}-${month}-${res.data.dueDay}`);
         }
         setValue(res.data.value);
         setRecurrence(res.data.recurrence);
@@ -62,7 +58,7 @@ export default function UpdateBillContainer({ billId }) {
     <Container>
       <form onSubmit={addNewTransaction}>
         <div className="line">
-          <label for="title">Conta</label>
+          <label forhtml="title">Conta</label>
           <input
             disabled
             name="title"
@@ -73,7 +69,10 @@ export default function UpdateBillContainer({ billId }) {
         </div>
 
         <div className="line">
-          <label for="date">Vencimento</label>
+          <label forhtml="date">
+            Vencimento <br />
+            <span>mês/dia/ano</span>
+          </label>
           <input
             required
             disabled
@@ -85,7 +84,7 @@ export default function UpdateBillContainer({ billId }) {
         </div>
 
         <div className="line">
-          <label for="value">Valor</label>
+          <label forhtml="value">Valor</label>
           <input
             required
             disabled={!recurrence}
@@ -101,7 +100,7 @@ export default function UpdateBillContainer({ billId }) {
         </div>
 
         <div className="line">
-          <label for="paid">Conta paga</label>
+          <label forhtml="paid">Conta paga</label>
           <input
             className="checkbox"
             type="checkbox"
@@ -149,7 +148,11 @@ const Container = styled.div`
     }
 
     label {
-      font-size: 22px;
+      font-size: 23px;
+
+      span {
+        font-size: 12px;
+      }
     }
 
     .line {

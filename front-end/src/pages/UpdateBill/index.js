@@ -9,13 +9,14 @@ import UserContext from "../../contexts/UserContext";
 export default function UpdateBill() {
   const { user } = useContext(UserContext);
   const billId = useParams().id;
+  const month = useParams().month;
 
   return (
     <Container>
       <LoggedHeader />
       <h2>Editar conta</h2>
 
-      <UpdateBillContainer billId={billId} />
+      <UpdateBillContainer billId={billId} month={month} />
     </Container>
   );
 }
