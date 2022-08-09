@@ -14,6 +14,13 @@ export async function getBills(req: Request, res: Response) {
   res.status(200).send(bills);
 }
 
+export async function getBill(req: Request, res: Response) {
+  const user: UserTokenInfo = res.locals.user;
+  const billId = parseInt(req.params.id);
+  const bill = await billService.getBill(user.id, billId);
+  res.status(200).send(bill);
+}
+
 export async function createBill(req: Request, res: Response) {
   const bill = req.body;
   const user: UserTokenInfo = res.locals.user;

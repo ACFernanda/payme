@@ -84,7 +84,8 @@ export default function NewBillContainer() {
             className="checkbox"
             type="checkbox"
             name="recurrence"
-            onChange={(e) => setRecurrence(true)}
+            value={recurrence}
+            onChange={(e) => setRecurrence(!recurrence)}
           />
         </div>
 

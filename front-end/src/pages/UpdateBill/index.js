@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
 
 import LoggedHeader from "../../components/LoggedHeader";
 import UpdateBillContainer from "../../components/UpdateBillContainer";
@@ -7,13 +8,14 @@ import UserContext from "../../contexts/UserContext";
 
 export default function UpdateBill() {
   const { user } = useContext(UserContext);
+  const billId = useParams().id;
 
   return (
     <Container>
       <LoggedHeader />
       <h2>Editar conta</h2>
 
-      <UpdateBillContainer />
+      <UpdateBillContainer billId={billId} />
     </Container>
   );
 }

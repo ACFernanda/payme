@@ -17,6 +17,11 @@ export async function getBills(userId: number, month: number, year: number) {
   return bills;
 }
 
+export async function getBill(userId: number, billId: number) {
+  const bill = await billRepository.findByUserIdAndBillId(userId, billId);
+  return bill;
+}
+
 export async function updateBill(billData: UpdateBillData) {
   await transactionRepository.insert(billData);
   return;

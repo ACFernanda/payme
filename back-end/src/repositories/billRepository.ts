@@ -22,6 +22,14 @@ export async function findByUserIdMonthAndYear(
   return bills;
 }
 
+export async function findByUserIdAndBillId(userId: number, billId: number) {
+  const bill = await prisma.bills.findFirst({
+    where: { userId, id: billId },
+    include: { transactions: { where: { userId } } },
+  });
+  return bill;
+}
+
 export async function insert(billData: CreateBillData): Promise<void> {
   await prisma.bills.create({
     data: billData,

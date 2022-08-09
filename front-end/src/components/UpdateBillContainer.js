@@ -1,47 +1,73 @@
-import { useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-export default function UpdateBillContainer() {
-  const [name, setName] = useState("");
+import TokenContext from "../contexts/TokenContext";
+import UserContext from "../contexts/UserContext";
+import { getBill, createTransaction } from "../services/api";
+
+export default function UpdateBillContainer({ billId }) {
+  const { token } = useContext(TokenContext);
+  const { user } = useContext(UserContext);
+  const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [value, setValue] = useState("");
-  const [recurrence, setRecurrence] = useState("");
-  const [paid, setPaid] = useState("");
+  const [paid, setPaid] = useState(false);
 
   const navigate = useNavigate();
 
-  async function addNewBill(event) {
+  useEffect(() => {
+    (() => {
+      const billResponse = getBill(token, billId);
+      billResponse.then((res) => {
+        console.log(res.data);
+        setTitle(res.data.title);
+        {
+          res.data.dueMonth < 10
+            ? setDate(
+                `${res.data.dueYear}-0${res.data.dueMonth}-${res.data.dueDay}`
+              )
+            : setDate(
+                `${res.data.dueYear}-${res.data.dueMonth}-${res.data.dueDay}`
+              );
+        }
+        setValue(res.data.value);
+      });
+    })();
+  }, []);
+
+  async function addNewTransaction(event) {
     event.preventDefault();
 
     const formData = {
-      name: name,
-      date: date,
+      dueDay: parseInt(date.split("-")[2]),
+      dueMonth: parseInt(date.split("-")[1]),
+      dueYear: parseInt(date.split("-")[0]),
       value: value,
-      recurrence: recurrence,
       paid: paid,
     };
 
     try {
-      alert("Criei");
+      await createTransaction(formData, billId, token);
       console.log(formData);
-      navigate("/");
+      navigate("/main");
     } catch (error) {
+      console.log(error);
       alert(`Something went wrong. ${error.message}`);
     }
   }
 
   return (
     <Container>
-      <form onSubmit={addNewBill}>
+      <form onSubmit={addNewTransaction}>
         <div className="line">
-          <label for="name">Conta</label>
+          <label for="title">Conta</label>
           <input
-            required
-            name="name"
+            disabled
+            name="title"
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </div>
 
@@ -70,16 +96,6 @@ export default function UpdateBillContainer() {
             onChange={(e) => setValue(e.target.value)}
           />
         </div>
-        <div className="line">
-          <label for="recurrence">Recorrência mensal</label>
-          <input
-            className="checkbox"
-            type="checkbox"
-            name="recurrence"
-            value="true"
-            onChange={(e) => setRecurrence(e.target.value)}
-          />
-        </div>
 
         <div className="line">
           <label for="paid">Conta paga</label>
@@ -87,12 +103,13 @@ export default function UpdateBillContainer() {
             className="checkbox"
             type="checkbox"
             name="paid"
-            value="true"
-            onChange={(e) => setPaid(e.target.value)}
+            value={paid}
+            onChange={(e) => setPaid(!paid)}
           />
         </div>
 
         <button type="submit">Salvar</button>
+        <p onClick={() => alert("Cliquei")}>DELETAR CONTA</p>
       </form>
     </Container>
   );
@@ -154,6 +171,18 @@ const Container = styled.div`
       position: absolute;
       top: 405px;
       left: 0;
+    }
+
+    p {
+      font-family: "Recursive";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      text-decoration-line: underline;
+      color: #000000;
+      text-align: center;
+      margin-top: 80px;
+      cursor: pointer;
     }
   }
 `;

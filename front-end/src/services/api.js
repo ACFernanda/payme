@@ -28,8 +28,24 @@ export const getBills = async (token, month, year) => {
   });
 };
 
+export const getBill = async (token, billId) => {
+  return api.get(`/bill/${billId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 export const createBill = async (formData, token) => {
   await api.post("/bills", formData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const createTransaction = async (formData, billId, token) => {
+  await api.put(`/bills/${billId}`, formData, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
