@@ -2,11 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-export default function NewBillContainer() {
+export default function UpdateBillContainer() {
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
   const [value, setValue] = useState("");
   const [recurrence, setRecurrence] = useState("");
+  const [paid, setPaid] = useState("");
 
   const navigate = useNavigate();
 
@@ -18,6 +19,7 @@ export default function NewBillContainer() {
       date: date,
       value: value,
       recurrence: recurrence,
+      paid: paid,
     };
 
     try {
@@ -76,6 +78,17 @@ export default function NewBillContainer() {
             name="recurrence"
             value="true"
             onChange={(e) => setRecurrence(e.target.value)}
+          />
+        </div>
+
+        <div className="line">
+          <label for="paid">Conta paga</label>
+          <input
+            className="checkbox"
+            type="checkbox"
+            name="paid"
+            value="true"
+            onChange={(e) => setPaid(e.target.value)}
           />
         </div>
 

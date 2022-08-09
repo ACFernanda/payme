@@ -5,7 +5,7 @@ import LoginPage from "./pages/Login";
 import RegisterPage from "./pages/SignUp";
 import Homepage from "./pages/Homepage";
 import CreateBill from "./pages/CreateBill";
-// import UpdateBill from "./pages/UpdateBill";
+import UpdateBill from "./pages/UpdateBill";
 
 import UserContext from "./contexts/UserContext.js";
 import TokenContext from "./contexts/TokenContext.js";
@@ -23,7 +23,7 @@ const App = () => {
             <Route path="/sign-up" element={<RegisterPage />} />
             <Route path="/main" element={<Homepage />} />
             <Route path="/bills/new" element={<CreateBill />} />
-            {/* <Route path="/bills/:id" element={<UpdateBill />} /> */}
+            <Route path="/bills/:id" element={<UpdateBill />} />
           </Routes>
           <GlobalStyle />
         </Router>

@@ -1,19 +1,22 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export default function BillInfo({ bill }) {
   return (
-    <BillContainer>
-      <p className="due">{bill.dueDay}</p>
-      {bill.recurrence === true ? (
-        <span>
-          <img src={"assets/loop.png"} alt="loop" />
-        </span>
-      ) : (
-        <span></span>
-      )}
-      <p className="bill">{bill.title}</p>
-      <p className="value">R$ {bill.value}</p>
-    </BillContainer>
+    <Link to={`/bills/${bill.id}`}>
+      <BillContainer>
+        <p className="due">{bill.dueDay}</p>
+        {bill.recurrence === true ? (
+          <span>
+            <img src={"/assets/loop.png"} alt="loop" />
+          </span>
+        ) : (
+          <span></span>
+        )}
+        <p className="bill">{bill.title}</p>
+        <p className="value">R$ {bill.value}</p>
+      </BillContainer>
+    </Link>
   );
 }
 
