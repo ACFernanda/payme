@@ -34,8 +34,8 @@ export default function Navigation({
       <IconContext.Provider value={{ color: "#D9D9D9", size: "55px" }}>
         <IoMdArrowDropleft
           onClick={() => {
-            if (month === 0) {
-              setMonth(11);
+            if (month === 1) {
+              setMonth(12);
               setYear(year - 1);
             } else {
               setMonth(month - 1);
@@ -50,8 +50,8 @@ export default function Navigation({
         </div>
         <IoMdArrowDropright
           onClick={() => {
-            if (month === 11) {
-              setMonth(0);
+            if (month === 12) {
+              setMonth(1);
               setYear(year + 1);
             } else {
               setMonth(month + 1);

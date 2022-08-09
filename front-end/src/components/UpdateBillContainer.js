@@ -13,6 +13,7 @@ export default function UpdateBillContainer({ billId }) {
   const [date, setDate] = useState("");
   const [value, setValue] = useState("");
   const [paid, setPaid] = useState(false);
+  const [recurrence, setRecurrence] = useState();
 
   const navigate = useNavigate();
 
@@ -20,7 +21,6 @@ export default function UpdateBillContainer({ billId }) {
     (() => {
       const billResponse = getBill(token, billId);
       billResponse.then((res) => {
-        console.log(res.data);
         setTitle(res.data.title);
         {
           res.data.dueMonth < 10
@@ -32,6 +32,7 @@ export default function UpdateBillContainer({ billId }) {
               );
         }
         setValue(res.data.value);
+        setRecurrence(res.data.recurrence);
       });
     })();
   }, []);
@@ -75,6 +76,7 @@ export default function UpdateBillContainer({ billId }) {
           <label for="date">Vencimento</label>
           <input
             required
+            disabled
             name="date"
             type="date"
             value={date}
@@ -86,6 +88,7 @@ export default function UpdateBillContainer({ billId }) {
           <label for="value">Valor</label>
           <input
             required
+            disabled={!recurrence}
             name="value"
             type="number"
             min="0.01"
