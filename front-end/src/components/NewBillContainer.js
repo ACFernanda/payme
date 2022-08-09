@@ -1,12 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+import { createBill } from "../services/api";
+import TokenContext from "../contexts/TokenContext";
+import UserContext from "../contexts/UserContext";
+
 export default function NewBillContainer() {
-  const [name, setName] = useState("");
+  const { token } = useContext(TokenContext);
+  const { user } = useContext(UserContext);
+  const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [value, setValue] = useState("");
-  const [recurrence, setRecurrence] = useState("");
+  const [recurrence, setRecurrence] = useState(false);
 
   const navigate = useNavigate();
 
@@ -14,17 +20,20 @@ export default function NewBillContainer() {
     event.preventDefault();
 
     const formData = {
-      name: name,
-      date: date,
+      title: title,
+      dueDay: parseInt(date.split("-")[2]),
+      dueMonth: parseInt(date.split("-")[1]),
+      dueYear: parseInt(date.split("-")[0]),
       value: value,
       recurrence: recurrence,
     };
 
     try {
-      alert("Criei");
+      await createBill(formData, token);
       console.log(formData);
-      navigate("/");
+      navigate("/main");
     } catch (error) {
+      console.log(error);
       alert(`Something went wrong. ${error.message}`);
     }
   }
@@ -33,13 +42,14 @@ export default function NewBillContainer() {
     <Container>
       <form onSubmit={addNewBill}>
         <div className="line">
-          <label for="name">Conta</label>
+          <label for="title">Conta</label>
           <input
             required
-            name="name"
+            name="title"
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={title}
+            maxLength="14"
+            onChange={(e) => setTitle(e.target.value)}
           />
         </div>
 
@@ -74,8 +84,7 @@ export default function NewBillContainer() {
             className="checkbox"
             type="checkbox"
             name="recurrence"
-            value="true"
-            onChange={(e) => setRecurrence(e.target.value)}
+            onChange={(e) => setRecurrence(true)}
           />
         </div>
 

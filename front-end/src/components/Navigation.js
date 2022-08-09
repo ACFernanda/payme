@@ -15,18 +15,18 @@ export default function Navigation({
 }) {
   const { token } = useContext(TokenContext);
   const months = {
-    0: "JANEIRO",
-    1: "FEVEREIRO",
-    2: "MARÇO",
-    3: "ABRIL",
-    4: "MAIO",
-    5: "JUNHO",
-    6: "JULHO",
-    7: "AGOSTO",
-    8: "SETEMBRO",
-    9: "OUTUBRO",
-    10: "NOVEMBRO",
-    11: "DEZEMBRO",
+    1: "JANEIRO",
+    2: "FEVEREIRO",
+    3: "MARÇO",
+    4: "ABRIL",
+    5: "MAIO",
+    6: "JUNHO",
+    7: "JULHO",
+    8: "AGOSTO",
+    9: "SETEMBRO",
+    10: "OUTUBRO",
+    11: "NOVEMBRO",
+    12: "DEZEMBRO",
   };
 
   return (

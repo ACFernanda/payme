@@ -27,3 +27,11 @@ export const getBills = async (token, month, year) => {
     },
   });
 };
+
+export const createBill = async (formData, token) => {
+  await api.post("/bills", formData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

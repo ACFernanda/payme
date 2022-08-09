@@ -14,7 +14,7 @@ export default function Homepage() {
   const today = new Date();
 
   const [bills, setBills] = useState([]);
-  const [month, setMonth] = useState(today.getMonth());
+  const [month, setMonth] = useState(today.getMonth() + 1);
   const [year, setYear] = useState(today.getFullYear());
 
   async function getAllBills(token) {
