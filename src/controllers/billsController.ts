@@ -4,7 +4,7 @@ import { CreateBillData } from "../repositories/billRepository.js";
 import { UpdateBillData } from "../repositories/transactionRepository.js";
 import { UserTokenInfo } from "../repositories/authRepository.js";
 
-import * as billService from "./../services/billService.js";
+import * as billService from "../services/billService.js";
 
 export async function getBills(req: Request, res: Response) {
   const user: UserTokenInfo = res.locals.user;
