@@ -82,12 +82,11 @@ export default function UpdateBillContainer({ billId, month, year, paid }) {
       dueMonth: parseInt(date.split("-")[1]),
       dueYear: parseInt(date.split("-")[0]),
       value: value,
-      paid: paid,
+      paid: payment,
     };
 
     try {
       await createTransaction(formData, billId, token);
-      console.log(formData);
       navigate("/main");
     } catch (error) {
       console.log(error);

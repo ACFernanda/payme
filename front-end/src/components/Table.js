@@ -20,7 +20,17 @@ export default function Table({ bills, month, year }) {
           );
 
           if (transaction === undefined) {
-            return;
+            return (
+              <BillInfo
+                bill={{
+                  ...bill,
+                  paid: false,
+                }}
+                key={bill.id}
+                month={month}
+                year={year}
+              />
+            );
           }
 
           return (
