@@ -6,7 +6,7 @@ import TokenContext from "../contexts/TokenContext";
 import UserContext from "../contexts/UserContext";
 import { getBill, createTransaction } from "../services/api";
 
-export default function UpdateBillContainer({ billId, month }) {
+export default function UpdateBillContainer({ billId, month, year }) {
   const { token } = useContext(TokenContext);
   const { user } = useContext(UserContext);
   const [title, setTitle] = useState("");
@@ -22,13 +22,54 @@ export default function UpdateBillContainer({ billId, month }) {
       const billResponse = getBill(token, billId);
       billResponse.then((res) => {
         setTitle(res.data.title);
-        {
-          month < 10
-            ? setDate(`${res.data.dueYear}-0${month}-${res.data.dueDay}`)
-            : setDate(`${res.data.dueYear}-${month}-${res.data.dueDay}`);
-        }
         setValue(res.data.value);
         setRecurrence(res.data.recurrence);
+        if (month == 2) {
+          if (res.data.dueDay > 28) {
+            setDate(`${year}-0${month}-28`);
+            return;
+          } else {
+            setDate(`${year}-0${month}-${res.data.dueDay}`);
+            return;
+          }
+        }
+        if (month == 4 || month == 6 || month == 9 || month == 11) {
+          if (month < 10) {
+            if (res.data.dueDay > 30) {
+              setDate(`${year}-0${month}-30`);
+              return;
+            } else {
+              setDate(`${year}-0${month}-${res.data.dueDay}`);
+              return;
+            }
+          }
+          if (month >= 10) {
+            if (res.data.dueDay > 30) {
+              setDate(`${year}-${month}-30`);
+              return;
+            } else {
+              setDate(`${year}-${month}-${res.data.dueDay}`);
+              return;
+            }
+          }
+        }
+        if (
+          month == 1 ||
+          month == 3 ||
+          month == 5 ||
+          month == 7 ||
+          month == 8 ||
+          month == 10 ||
+          month == 12
+        ) {
+          if (month < 10) {
+            setDate(`${year}-0${month}-${res.data.dueDay}`);
+            return;
+          } else {
+            setDate(`${year}-${month}-${res.data.dueDay}`);
+            return;
+          }
+        }
       });
     })();
   }, []);

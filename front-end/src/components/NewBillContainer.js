@@ -30,7 +30,6 @@ export default function NewBillContainer() {
 
     try {
       await createBill(formData, token);
-      console.log(formData);
       navigate("/main");
     } catch (error) {
       console.log(error);

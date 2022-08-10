@@ -36,7 +36,7 @@ export default function Homepage() {
       <LoggedHeader />
       <h2>Olá, {user.name}!</h2>
 
-      <Table bills={bills} month={month} />
+      <Table bills={bills} month={month} year={year} />
       <Navigation
         month={month}
         year={year}

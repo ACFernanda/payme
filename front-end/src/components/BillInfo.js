@@ -1,11 +1,23 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export default function BillInfo({ bill, month }) {
+export default function BillInfo({ bill, month, year }) {
+  let formattedDueDay = bill.dueDay;
+  if (month == 2) {
+    if (bill.dueDay > 28) {
+      formattedDueDay = 28;
+    }
+  }
+  if (month == 4 || month == 6 || month == 9 || month == 11) {
+    if (bill.dueDay > 30) {
+      formattedDueDay = 30;
+    }
+  }
+
   return (
-    <Link to={`/bills/${bill.id}/${month}`}>
+    <Link to={`/bills/${bill.id}/${month}/${year}`}>
       <BillContainer>
-        <p className="due">{bill.dueDay}</p>
+        <p className="due">{formattedDueDay}</p>
         {bill.recurrence === true ? (
           <span>
             <img src={"/assets/loop.png"} alt="loop" />
