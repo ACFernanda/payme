@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export default function BillInfo({ bill, month, year }) {
+  const today = new Date();
   let formattedDueDay = bill.dueDay;
   if (month == 2) {
     if (bill.dueDay > 28) {
@@ -15,8 +16,14 @@ export default function BillInfo({ bill, month, year }) {
   }
 
   return (
-    <Link to={`/bills/${bill.id}/${month}/${year}`}>
-      <BillContainer>
+    <Link to={`/bills/${bill.id}/${month}/${year}/${bill.paid}`}>
+      <BillContainer
+        checkPaid={bill.paid}
+        checkDue={
+          (today.getFullYear() >= year && today.getMonth() + 1 > month) ||
+          (today.getMonth() + 1 === month && today.getDate() > formattedDueDay)
+        }
+      >
         <p className="due">{formattedDueDay}</p>
         {bill.recurrence === true ? (
           <span>
@@ -35,7 +42,8 @@ export default function BillInfo({ bill, month, year }) {
 const BillContainer = styled.div`
   width: 500px;
   height: 65px;
-  background: #ffffff;
+  background: ${(props) =>
+    props.checkPaid ? "#A5FFB4" : props.checkDue ? "#FF9FC6" : "#ffffff"};
   border-radius: 1px 1px 1px 1px;
   display: flex;
   align-items: center;

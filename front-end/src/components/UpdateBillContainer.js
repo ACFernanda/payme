@@ -6,13 +6,13 @@ import TokenContext from "../contexts/TokenContext";
 import UserContext from "../contexts/UserContext";
 import { getBill, createTransaction } from "../services/api";
 
-export default function UpdateBillContainer({ billId, month, year }) {
+export default function UpdateBillContainer({ billId, month, year, paid }) {
   const { token } = useContext(TokenContext);
   const { user } = useContext(UserContext);
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [value, setValue] = useState("");
-  const [paid, setPaid] = useState(false);
+  const [payment, setPayment] = useState(JSON.parse(paid));
   const [recurrence, setRecurrence] = useState();
 
   const navigate = useNavigate();
@@ -146,8 +146,8 @@ export default function UpdateBillContainer({ billId, month, year }) {
             className="checkbox"
             type="checkbox"
             name="paid"
-            value={paid}
-            onChange={(e) => setPaid(!paid)}
+            checked={payment}
+            onChange={(e) => setPayment(!payment)}
           />
         </div>
 

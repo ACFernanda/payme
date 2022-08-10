@@ -23,7 +23,10 @@ const App = () => {
             <Route path="/sign-up" element={<RegisterPage />} />
             <Route path="/main" element={<Homepage />} />
             <Route path="/bills/new" element={<CreateBill />} />
-            <Route path="/bills/:id/:month/:year" element={<UpdateBill />} />
+            <Route
+              path="/bills/:id/:month/:year/:paid"
+              element={<UpdateBill />}
+            />
           </Routes>
           <GlobalStyle />
         </Router>

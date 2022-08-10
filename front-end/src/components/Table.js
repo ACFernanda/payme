@@ -13,13 +13,39 @@ export default function Table({ bills, month, year }) {
         <span className="bill">Conta</span>
         <span className="value">Valor</span>
       </header>
-      {bills.length > 0 ? (
-        bills.map((bill) => (
-          <BillInfo bill={bill} key={bill.id} month={month} year={year} />
-        ))
-      ) : (
-        <></>
-      )}
+      {bills.map((bill) => {
+        if (bill.transactions.length > 0) {
+          const transaction = bill.transactions.findLast(
+            (transaction) => transaction.dueMonth === month
+          );
+
+          if (transaction === undefined) {
+            return;
+          }
+
+          return (
+            <BillInfo
+              bill={{
+                ...bill,
+                value: transaction.value,
+                paid: transaction.paid,
+              }}
+              key={bill.id}
+              month={month}
+              year={year}
+            />
+          );
+        } else {
+          return (
+            <BillInfo
+              bill={{ ...bill, paid: false }}
+              key={bill.id}
+              month={month}
+              year={year}
+            />
+          );
+        }
+      })}
       <div className="add-bill" onClick={() => navigate("/bills/new")}>
         <span className="add">Adicionar conta</span>
       </div>
