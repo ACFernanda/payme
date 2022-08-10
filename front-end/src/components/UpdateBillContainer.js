@@ -1,15 +1,12 @@
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 
 import TokenContext from "../contexts/TokenContext";
-import UserContext from "../contexts/UserContext";
 import { getBill, createTransaction } from "../services/api";
 
 export default function UpdateBillContainer({ billId, month, year, paid }) {
   const { token } = useContext(TokenContext);
-  const { user } = useContext(UserContext);
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [value, setValue] = useState("");

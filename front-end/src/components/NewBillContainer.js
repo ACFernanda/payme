@@ -4,11 +4,9 @@ import styled from "styled-components";
 
 import { createBill } from "../services/api";
 import TokenContext from "../contexts/TokenContext";
-import UserContext from "../contexts/UserContext";
 
 export default function NewBillContainer() {
   const { token } = useContext(TokenContext);
-  const { user } = useContext(UserContext);
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [value, setValue] = useState("");

@@ -1,9 +1,6 @@
-import { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { IconContext } from "react-icons";
 import { IoMdArrowDropright, IoMdArrowDropleft } from "react-icons/io";
-
-import TokenContext from "../contexts/TokenContext";
 
 export default function Navigation({
   month,
@@ -13,7 +10,6 @@ export default function Navigation({
   setBills,
   getAllBills,
 }) {
-  const { token } = useContext(TokenContext);
   const months = {
     1: "JANEIRO",
     2: "FEVEREIRO",
