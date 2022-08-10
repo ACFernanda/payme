@@ -41,9 +41,9 @@ export async function updateBill(req: Request, res: Response) {
 }
 
 export async function deleteBill(req: Request, res: Response) {
-  const transactionId = parseInt(req.params.id);
+  const billId = parseInt(req.params.billId);
   const user: UserTokenInfo = res.locals.user;
 
-  await billService.deleteBill(transactionId, user.id);
+  await billService.deleteBill(billId, user.id);
   res.sendStatus(201);
 }

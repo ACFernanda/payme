@@ -51,3 +51,11 @@ export const createTransaction = async (formData, billId, token) => {
     },
   });
 };
+
+export const deleteBill = async (billId, token) => {
+  await api.delete(`/bills/${billId}/`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

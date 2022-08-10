@@ -27,23 +27,16 @@ export async function updateBill(billData: UpdateBillData) {
   return;
 }
 
-export async function deleteBill(transactionId: number, userId: number) {
-  const transaction = await transactionRepository.findById(transactionId);
+export async function deleteBill(billId: number, userId: number) {
+  const bill = await billRepository.findByUserIdAndBillId(userId, billId);
+  console.log(bill);
 
-  if (!transaction) {
+  if (!bill) {
     throw {
       type: "not_found",
-      message: `Transaction not found!`,
+      message: `Bill not found!`,
     };
   }
 
-  if (transaction.userId !== userId) {
-    throw {
-      type: "unauthorized",
-      message: `Transaction not from user!`,
-    };
-  }
-
-  await transactionRepository.deleteBill(transactionId);
-  return;
+  return await billRepository.deleteBill(billId);
 }

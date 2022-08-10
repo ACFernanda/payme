@@ -35,3 +35,10 @@ export async function insert(billData: CreateBillData): Promise<void> {
     data: billData,
   });
 }
+
+export async function deleteBill(billId: number) {
+  await prisma.transactions.deleteMany({ where: { billId: billId } });
+  await prisma.bills.delete({
+    where: { id: billId },
+  });
+}

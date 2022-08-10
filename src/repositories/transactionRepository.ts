@@ -9,7 +9,7 @@ export async function insert(billData: UpdateBillData) {
   });
 }
 
-export async function deleteBill(transactionId: number) {
+export async function deleteTransaction(transactionId: number) {
   await prisma.transactions.delete({
     where: { id: transactionId },
   });

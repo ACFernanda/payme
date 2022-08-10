@@ -19,6 +19,6 @@ billsRouter.get("/bills/:month/:year", getBills);
 billsRouter.get("/bill/:id", getBill);
 billsRouter.post("/bills", schemaValidator(createBillSchema), createBill);
 billsRouter.put("/bills/:id", schemaValidator(updateBillSchema), updateBill);
-billsRouter.delete("/transactions/:id", deleteBill);
+billsRouter.delete("/bills/:billId", deleteBill);
 
 export default billsRouter;

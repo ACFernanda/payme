@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import TokenContext from "../contexts/TokenContext";
-import { getBill, createTransaction } from "../services/api";
+import { getBill, createTransaction, deleteBill } from "../services/api";
 
 export default function UpdateBillContainer({ billId, month, year, paid }) {
   const { token } = useContext(TokenContext);
@@ -116,6 +116,16 @@ export default function UpdateBillContainer({ billId, month, year, paid }) {
     }
   }
 
+  async function deleteRecord() {
+    try {
+      await deleteBill(billId, token);
+      navigate("/main");
+    } catch (error) {
+      console.log(error);
+      alert(`Something went wrong. ${error.message}`);
+    }
+  }
+
   return (
     <Container>
       <form onSubmit={addNewTransaction}>
@@ -173,7 +183,18 @@ export default function UpdateBillContainer({ billId, month, year, paid }) {
         </div>
 
         <button type="submit">Salvar</button>
-        <p onClick={() => alert("Cliquei")}>DELETAR CONTA</p>
+        <p
+          onClick={() => {
+            const confirm = window.confirm(
+              `Deseja deletar TODOS os registros de ${title}?`
+            );
+            if (confirm == true) {
+              deleteRecord();
+            }
+          }}
+        >
+          DELETAR TODOS
+        </p>
       </form>
     </Container>
   );
