@@ -4,15 +4,24 @@ import { Link } from "react-router-dom";
 export default function BillInfo({ bill, month, year }) {
   const today = new Date();
   let formattedDueDay = bill.dueDay;
-  if (month == 2) {
+  if (parseInt(month) === 2) {
     if (bill.dueDay > 28) {
       formattedDueDay = 28;
     }
   }
-  if (month == 4 || month == 6 || month == 9 || month == 11) {
+  if (
+    parseInt(month) === 4 ||
+    parseInt(month) === 6 ||
+    parseInt(month) === 9 ||
+    parseInt(month) === 11
+  ) {
     if (bill.dueDay > 30) {
       formattedDueDay = 30;
     }
+  }
+
+  if (formattedDueDay < 10) {
+    formattedDueDay = `0${formattedDueDay}`;
   }
 
   return (

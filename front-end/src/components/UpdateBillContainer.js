@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 
 import TokenContext from "../contexts/TokenContext";
 import UserContext from "../contexts/UserContext";
@@ -22,51 +23,75 @@ export default function UpdateBillContainer({ billId, month, year, paid }) {
       const billResponse = getBill(token, billId);
       billResponse.then((res) => {
         setTitle(res.data.title);
-        setValue(res.data.value);
         setRecurrence(res.data.recurrence);
-        if (month == 2) {
+
+        const transactions = res.data.transactions;
+        if (transactions.length > 0) {
+          const transaction = transactions.findLast(
+            (transaction) => transaction.dueMonth === parseInt(month)
+          );
+          if (transaction === undefined) {
+            setValue(res.data.value);
+          } else {
+            setValue(transaction.value);
+          }
+        } else {
+          setValue(res.data.value);
+        }
+
+        let dueDay = res.data.dueDay;
+        if (dueDay < 10) {
+          dueDay = `0${dueDay}`;
+        }
+
+        if (parseInt(month) === 2) {
           if (res.data.dueDay > 28) {
             setDate(`${year}-0${month}-28`);
             return;
           } else {
-            setDate(`${year}-0${month}-${res.data.dueDay}`);
+            setDate(`${year}-0${month}-${dueDay}`);
             return;
           }
         }
-        if (month == 4 || month == 6 || month == 9 || month == 11) {
-          if (month < 10) {
+        if (
+          parseInt(month) === 4 ||
+          parseInt(month) === 6 ||
+          parseInt(month) === 9 ||
+          parseInt(month) === 11
+        ) {
+          if (parseInt(month) < 10) {
             if (res.data.dueDay > 30) {
               setDate(`${year}-0${month}-30`);
               return;
             } else {
-              setDate(`${year}-0${month}-${res.data.dueDay}`);
+              setDate(`${year}-0${month}-${dueDay}`);
               return;
             }
           }
-          if (month >= 10) {
+          if (parseInt(month) >= 10) {
             if (res.data.dueDay > 30) {
               setDate(`${year}-${month}-30`);
               return;
             } else {
-              setDate(`${year}-${month}-${res.data.dueDay}`);
+              setDate(`${year}-${month}-${dueDay}`);
               return;
             }
           }
         }
         if (
-          month == 1 ||
-          month == 3 ||
-          month == 5 ||
-          month == 7 ||
-          month == 8 ||
-          month == 10 ||
-          month == 12
+          parseInt(month) === 1 ||
+          parseInt(month) === 3 ||
+          parseInt(month) === 5 ||
+          parseInt(month) === 7 ||
+          parseInt(month) === 8 ||
+          parseInt(month) === 10 ||
+          parseInt(month) === 12
         ) {
-          if (month < 10) {
-            setDate(`${year}-0${month}-${res.data.dueDay}`);
+          if (parseInt(month) < 10) {
+            setDate(`${year}-0${month}-${dueDay}`);
             return;
           } else {
-            setDate(`${year}-${month}-${res.data.dueDay}`);
+            setDate(`${year}-${month}-${dueDay}`);
             return;
           }
         }
