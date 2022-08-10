@@ -1,5 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { useState, useContext } from "react";
 import GlobalStyle from "./styles/GlobalStyle";
 import LoginPage from "./pages/Login";
 import RegisterPage from "./pages/SignUp";
@@ -14,6 +19,16 @@ const App = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const [token, setToken] = useState(JSON.parse(localStorage.getItem("token")));
 
+  const Private = ({ children }) => {
+    const { token } = useContext(TokenContext);
+
+    if (!token) {
+      return <Navigate to="/" />;
+    }
+
+    return children;
+  };
+
   return (
     <TokenContext.Provider value={{ token, setToken }}>
       <UserContext.Provider value={{ user, setUser }}>
@@ -21,11 +36,29 @@ const App = () => {
           <Routes>
             <Route path="/" element={<LoginPage />} />
             <Route path="/sign-up" element={<RegisterPage />} />
-            <Route path="/main" element={<Homepage />} />
-            <Route path="/bills/new" element={<CreateBill />} />
+            <Route
+              path="/main"
+              element={
+                <Private>
+                  <Homepage />
+                </Private>
+              }
+            />
+            <Route
+              path="/bills/new"
+              element={
+                <Private>
+                  <CreateBill />
+                </Private>
+              }
+            />
             <Route
               path="/bills/:id/:month/:year/:paid"
-              element={<UpdateBill />}
+              element={
+                <Private>
+                  <UpdateBill />
+                </Private>
+              }
             />
           </Routes>
           <GlobalStyle />
