@@ -47,3 +47,13 @@ export async function deleteBill(req: Request, res: Response) {
   await billService.deleteBill(billId, user.id);
   res.sendStatus(201);
 }
+
+export async function createEndDate(req: Request, res: Response) {
+  const endDate: { endMonth: number; endYear: number } = req.body;
+  const billId = parseInt(req.params.id);
+  const user: UserTokenInfo = res.locals.user;
+  const billData = { endDate, userId: user.id, billId };
+
+  await billService.createEndDate(billData);
+  res.sendStatus(201);
+}

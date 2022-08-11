@@ -29,6 +29,8 @@ model bills {
   dueYear             Int
   value               String
   recurrence          Boolean       @default(false)
+  endMonth            Int?        
+  endYear             Int?
 
   user            users @relation(fields: [userId], references: [id])
   transactions transactions[]

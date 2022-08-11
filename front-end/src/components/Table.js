@@ -14,6 +14,15 @@ export default function Table({ bills, month, year }) {
         <span className="value">Valor</span>
       </header>
       {bills.map((bill) => {
+        if (bill.endYear !== null && bill.endMonth !== null) {
+          if (
+            bill.endYear < year ||
+            (bill.endYear === year && bill.endMonth <= month)
+          ) {
+            return;
+          }
+        }
+
         if (bill.transactions.length > 0) {
           const transaction = bill.transactions.findLast(
             (transaction) => transaction.dueMonth === month

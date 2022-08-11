@@ -59,3 +59,11 @@ export const deleteBill = async (billId, token) => {
     },
   });
 };
+
+export const deleteThisAndFollowing = async (formData, billId, token) => {
+  await api.post(`/bills/${billId}`, formData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

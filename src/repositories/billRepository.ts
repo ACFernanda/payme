@@ -42,3 +42,14 @@ export async function deleteBill(billId: number) {
     where: { id: billId },
   });
 }
+
+export async function updateEndDate(
+  endMonth: number,
+  endYear: number,
+  billId: number
+): Promise<void> {
+  await prisma.bills.update({
+    where: { id: billId },
+    data: { endMonth, endYear },
+  });
+}

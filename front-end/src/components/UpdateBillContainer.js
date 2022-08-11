@@ -3,7 +3,12 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import TokenContext from "../contexts/TokenContext";
-import { getBill, createTransaction, deleteBill } from "../services/api";
+import {
+  getBill,
+  createTransaction,
+  deleteBill,
+  deleteThisAndFollowing,
+} from "../services/api";
 
 export default function UpdateBillContainer({ billId, month, year, paid }) {
   const { token } = useContext(TokenContext);
@@ -126,6 +131,21 @@ export default function UpdateBillContainer({ billId, month, year, paid }) {
     }
   }
 
+  async function deleteRecordAndFollowing() {
+    const formData = {
+      endMonth: parseInt(date.split("-")[1]),
+      endYear: parseInt(date.split("-")[0]),
+    };
+
+    try {
+      await deleteThisAndFollowing(formData, billId, token);
+      navigate("/main");
+    } catch (error) {
+      console.log(error);
+      alert(`Something went wrong. ${error.message}`);
+    }
+  }
+
   return (
     <Container>
       <form onSubmit={addNewTransaction}>
@@ -183,19 +203,32 @@ export default function UpdateBillContainer({ billId, month, year, paid }) {
         </div>
 
         <button type="submit">Salvar</button>
-        <p
-          onClick={() => {
-            const confirm = window.confirm(
-              `Deseja deletar TODOS os registros de ${title}?`
-            );
-            if (confirm == true) {
-              deleteRecord();
-            }
-          }}
-        >
-          DELETAR TODOS
-        </p>
       </form>
+
+      <p
+        onClick={() => {
+          const confirm = window.confirm(
+            `Deseja deletar TODOS os registros de ${title}?`
+          );
+          if (confirm == true) {
+            deleteRecord();
+          }
+        }}
+      >
+        DELETAR TODOS
+      </p>
+      <p
+        onClick={() => {
+          const confirm = window.confirm(
+            `Deseja deletar este e os próximos registros de ${title}?`
+          );
+          if (confirm == true) {
+            deleteRecordAndFollowing();
+          }
+        }}
+      >
+        DELETAR ESTE E OS PRÓXIMOS
+      </p>
     </Container>
   );
 }
@@ -210,14 +243,15 @@ const Container = styled.div`
   font-weight: 600;
   color: #333333;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin-top: 30px;
   position: relative;
 
   form {
     width: 90%;
     padding: 10px;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
 
     input {
       width: 160px;
@@ -261,17 +295,16 @@ const Container = styled.div`
       top: 405px;
       left: 0;
     }
+  }
 
-    p {
-      font-family: "Recursive";
-      font-style: normal;
-      font-weight: 600;
-      font-size: 20px;
-      text-decoration-line: underline;
-      color: #000000;
-      text-align: center;
-      margin-top: 80px;
-      cursor: pointer;
-    }
+  p {
+    font-family: "Recursive";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    text-decoration: underline;
+    color: #000000;
+    cursor: pointer;
+    margin-bottom: 12px;
   }
 `;

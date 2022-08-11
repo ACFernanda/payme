@@ -29,7 +29,6 @@ export async function updateBill(billData: UpdateBillData) {
 
 export async function deleteBill(billId: number, userId: number) {
   const bill = await billRepository.findByUserIdAndBillId(userId, billId);
-  console.log(bill);
 
   if (!bill) {
     throw {
@@ -39,4 +38,12 @@ export async function deleteBill(billId: number, userId: number) {
   }
 
   return await billRepository.deleteBill(billId);
+}
+
+export async function createEndDate(billData) {
+  const billId = billData.billId;
+  const endMonth = billData.endDate.endMonth;
+  const endYear = billData.endDate.endYear;
+  await billRepository.updateEndDate(endMonth, endYear, billId);
+  return;
 }
