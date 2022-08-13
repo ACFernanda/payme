@@ -38,6 +38,7 @@ export default function SignUpPage() {
       <form onSubmit={register}>
         <input
           required
+          id="name"
           type="text"
           placeholder="Nome"
           value={name}
@@ -45,6 +46,7 @@ export default function SignUpPage() {
         />
         <input
           required
+          id="email"
           type="email"
           placeholder="E-mail"
           value={email}
@@ -52,6 +54,7 @@ export default function SignUpPage() {
         />
         <input
           required
+          id="password"
           type="password"
           placeholder="Senha"
           value={password}
@@ -59,6 +62,7 @@ export default function SignUpPage() {
         />
         <input
           required
+          id="confirm-password"
           type="password"
           placeholder="Confirme a senha"
           value={confirmPassword}

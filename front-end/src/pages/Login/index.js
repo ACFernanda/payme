@@ -34,6 +34,7 @@ export default function LoginPage() {
 
       navigate("/main");
     } catch (error) {
+      console.log(error.response);
       alert(`${error.response.data}`);
     }
   }
@@ -45,6 +46,7 @@ export default function LoginPage() {
       <form onSubmit={login}>
         <input
           required
+          id="email"
           type="email"
           placeholder="E-mail"
           value={email}
@@ -52,12 +54,15 @@ export default function LoginPage() {
         />
         <input
           required
+          id="password"
           type="password"
           placeholder="Senha"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Entrar</button>
+        <button id="submit" type="submit">
+          Entrar
+        </button>
       </form>
 
       <Link to="/sign-up">

@@ -5,6 +5,7 @@ import {
   CreateUserData,
   findByEmail,
   insert,
+  deleteAllUsers,
 } from "../repositories/authRepository.js";
 
 const SALT = 10;
@@ -44,4 +45,8 @@ export async function signIn(userData: { email: string; password: string }) {
 
   delete user.password;
   return { token, user };
+}
+
+export async function deleteAll() {
+  await deleteAllUsers();
 }

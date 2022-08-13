@@ -47,3 +47,7 @@ export async function createEndDate(billData) {
   await billRepository.updateEndDate(endMonth, endYear, billId);
   return;
 }
+
+export async function deleteAll() {
+  return await billRepository.deleteAll();
+}

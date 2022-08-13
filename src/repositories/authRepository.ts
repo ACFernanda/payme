@@ -21,3 +21,7 @@ export async function insert(userData: CreateUserData) {
     data: userData,
   });
 }
+
+export async function deleteAllUsers() {
+  await prisma.users.deleteMany();
+}

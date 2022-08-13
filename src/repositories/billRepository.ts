@@ -53,3 +53,9 @@ export async function updateEndDate(
     data: { endMonth, endYear },
   });
 }
+
+export async function deleteAll() {
+  await prisma.transactions.deleteMany();
+  await prisma.bills.deleteMany();
+  return;
+}
