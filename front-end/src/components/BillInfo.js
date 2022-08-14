@@ -90,4 +90,8 @@ const BillContainer = styled.div`
       }
     }
   }
+
+  @media (max-width: 515px) {
+    width: 100vw;
+  }
 `;

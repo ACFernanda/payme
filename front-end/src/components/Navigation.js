@@ -64,7 +64,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 50px;
 
   div {
     background-color: #fd227c;
@@ -84,5 +84,9 @@ const Container = styled.div`
       text-align: center;
       color: #ffffff;
     }
+  }
+
+  @media (max-width: 515px) {
+    margin-top: 25px;
   }
 `;

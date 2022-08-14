@@ -8,8 +8,18 @@ const Container = styled.div`
   h2 {
     font-family: "Recursive";
     font-weight: 400;
-    font-size: 20px;
+    margin-top: 20px;
+    font-size: 25px;
     color: #ffffff;
+  }
+
+  @media (max-width: 515px) {
+    width: 100vw;
+
+    h2 {
+      margin-top: 5px;
+      font-size: 21px;
+    }
   }
 `;
 

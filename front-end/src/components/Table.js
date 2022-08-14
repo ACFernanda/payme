@@ -117,4 +117,36 @@ const Container = styled.div`
     color: #333333;
     margin: 4px 0 30px 0;
     cursor: pointer;
+  }
+
+  @media (max-width: 515px) {
+    header {
+      width: 100vw;
+      border-radius: 0;
+      position: relative;
+
+      .due {
+        margin: 0;
+        position: absolute;
+        left: 6px;
+      }
+
+      .bill {
+        margin: 0;
+        position: absolute;
+        left: 120px;
+      }
+
+      .value {
+        margin: 0;
+        position: absolute;
+        right: 6px;
+      }
+    }
+
+    .add-bill {
+      width: 100vw;
+      border-radius: 0;
+    }
+  }
 `;

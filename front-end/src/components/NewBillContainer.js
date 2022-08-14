@@ -51,7 +51,11 @@ export default function NewBillContainer() {
         </div>
 
         <div className="line">
-          <label forhtml="date">Vencimento</label>
+          <label forhtml="date">
+            Vencimento <br />
+            <span>mês/dia/ano</span>
+          </label>
+
           <input
             required
             name="date"
@@ -124,6 +128,10 @@ const Container = styled.div`
 
     label {
       font-size: 22px;
+
+      span {
+        font-size: 12px;
+      }
     }
 
     .line {
@@ -148,6 +156,16 @@ const Container = styled.div`
       position: absolute;
       top: 405px;
       left: 0;
+    }
+  }
+
+  @media (max-width: 515px) {
+    width: 95vw;
+
+    form {
+      button {
+        width: 95vw;
+      }
     }
   }
 `;

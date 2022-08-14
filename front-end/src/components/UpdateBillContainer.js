@@ -307,4 +307,14 @@ const Container = styled.div`
     cursor: pointer;
     margin-bottom: 12px;
   }
+
+  @media (max-width: 515px) {
+    width: 95vw;
+
+    form {
+      button {
+        width: 95vw;
+      }
+    }
+  }
 `;
