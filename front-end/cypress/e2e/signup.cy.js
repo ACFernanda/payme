@@ -4,9 +4,9 @@ import { faker } from "@faker-js/faker";
 
 const URL = "http://localhost:3000";
 
-// beforeEach(() => {
-//   cy.resetUsers();
-// });
+beforeEach(() => {
+  cy.resetUsers();
+});
 
 describe("sign up test", () => {
   it("Should signup and login successfully", () => {

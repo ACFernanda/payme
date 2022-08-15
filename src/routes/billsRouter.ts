@@ -14,7 +14,8 @@ import {
 
 const billsRouter = Router();
 
-billsRouter.use(tokenValidator);
+billsRouter.use("/bills", tokenValidator);
+billsRouter.use("/bill", tokenValidator);
 
 billsRouter.get("/bills/:month/:year", getBills);
 billsRouter.get("/bill/:id", getBill);

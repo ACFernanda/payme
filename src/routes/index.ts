@@ -9,8 +9,7 @@ const router = Router();
 router.use(authRouter);
 router.use(billsRouter);
 
-if (process.env.NODE_ENV == "test") {
+if (process.env.NODE_ENV === "test") {
   router.use(testsRouter);
 }
-
 export default router;

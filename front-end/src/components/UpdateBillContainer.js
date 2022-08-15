@@ -206,6 +206,7 @@ export default function UpdateBillContainer({ billId, month, year, paid }) {
       </form>
 
       <p
+        id="delete-all"
         onClick={() => {
           const confirm = window.confirm(
             `Deseja deletar TODOS os registros de ${title}?`

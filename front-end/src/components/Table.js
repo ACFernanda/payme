@@ -66,7 +66,9 @@ export default function Table({ bills, month, year }) {
         }
       })}
       <div className="add-bill" onClick={() => navigate("/bills/new")}>
-        <span className="add">Adicionar conta</span>
+        <span id="add-bill" className="add">
+          Adicionar conta
+        </span>
       </div>
     </Container>
   );

@@ -42,6 +42,7 @@ export default function NewBillContainer() {
           <label forhtml="title">Conta</label>
           <input
             required
+            id="title"
             name="title"
             type="text"
             value={title}
@@ -58,6 +59,7 @@ export default function NewBillContainer() {
 
           <input
             required
+            id="date"
             name="date"
             type="date"
             value={date}
@@ -69,6 +71,7 @@ export default function NewBillContainer() {
           <label forhtml="value">Valor</label>
           <input
             required
+            id="value"
             name="value"
             type="number"
             min="0.01"
@@ -82,6 +85,7 @@ export default function NewBillContainer() {
         <div className="line">
           <label forhtml="recurrence">Recorrência mensal</label>
           <input
+            id="recurrence"
             className="checkbox"
             type="checkbox"
             name="recurrence"
@@ -90,7 +94,9 @@ export default function NewBillContainer() {
           />
         </div>
 
-        <button type="submit">Salvar</button>
+        <button id="submit" type="submit">
+          Salvar
+        </button>
       </form>
     </Container>
   );
